@@ -23,7 +23,7 @@ public class Organ extends BaseObject {
 	@Override
 	public String toJSON() {
 		String format = 
-				"\"Organ\": {\n" +
+				"{\n" +
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d,\n" +
 				"    \"systemID\": %d\n" +

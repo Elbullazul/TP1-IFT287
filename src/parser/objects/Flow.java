@@ -32,17 +32,20 @@ public class Flow extends BaseObject {
 	@Override
 	public String toJSON() {
 		String format = 
-				"\"Flow\": {\n" +
+				"{\n" +
 				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d\n" +
-				"    \"Connectibles\": {\n";
+				"    \"id\": %d,\n" +
+				"    \"Connectibles\": [\n";
 		
 		for (Connectible cnn: this.connectibles) {
-			format += cnn.toJSON() + ",";
+			format += cnn.toJSON() + ",\n";
 		}
 		
+		// remove last comma
+		format = format.substring(0, format.length() - 2);
+		
 		format +=
-				"    }\n" +
+				"    ]\n" +
 				"}\n";
 		
 		return String.format(format, this.name, this.id);

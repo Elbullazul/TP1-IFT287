@@ -23,6 +23,18 @@ public class Connection extends BaseObject {
 		String format = 
 				"\"Connection\": {\n" +
 				"    \"id\": %d\n" +
+				"    \"target_ids\": [\n";
+		
+		for (Integer i : this.targets_ids) {
+			format +=
+				"    " + i + ",\n";
+		}
+		
+		// remove last comma
+		format = format.substring(0, format.length() - 2);
+		
+		format +=
+				"    ]" +
 				"}\n";
 		return String.format(format, this.id);
 	}

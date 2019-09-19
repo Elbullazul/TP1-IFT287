@@ -33,13 +33,14 @@ public class TractConnectible extends Connectible {
 	@Override
 	public String toJSON() {
 		String format = 
-				"\"%s\": {\n" +
+				"{\n" +
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d,\n" +
+				"    \"type\": \"%s\",\n" +
 				"    \"length\": %f,\n" +
 				"    \"volume\": %f\n" +
-				"};\n";
-		return String.format(format, this.type, this.name, this.id, this.length, this.volume);
+				"}\n";
+		return String.format(format, this.name, this.id, this.type, this.length, this.volume);
 	}
 
 	@Override

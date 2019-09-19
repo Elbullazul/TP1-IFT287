@@ -33,26 +33,34 @@ public class MainBody extends BaseObject {
 
 	@Override
 	public String toJSON() {
-		String format = 
+		String format =
+				"{\n" +
 				"\"MainBody\": {\n" +
 				"    \"bodyName\": \"%s\",\n" +
 				"    \"bodyId\": %d,\n" +
-				"    \"Systems\": {\n";
+				"    \"Systems\": [\n";
 		
 		for (HumanSystem sys : this.systems) {
-			format += sys.toJSON() + ",";
+			format += sys.toJSON() + ",\n";
 		}
 		
+		// remove last comma and newline
+		format = format.substring(0, format.length() - 2);
+		
 		format +=
-				"    },\n" +
-				"\"Organs\": {\n";
+				"    ],\n" +
+				"\"Organs\": [\n";
 		
 		for (Organ org : this.organs) {
 			format += org.toJSON() + ",\n";
 		}
 		
+		// remove last comma and newline
+		format = format.substring(0, format.length() - 2);
+		
 		format +=
-				"    }\n" +
+				"    ]\n" +
+				"}\n" +
 				"}\n";
 		
 		return String.format(format, this.name, this.id);

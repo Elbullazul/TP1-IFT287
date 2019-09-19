@@ -40,15 +40,19 @@ public class HumanSystem extends BaseObject {
 		String format = 
 				"{\n" +
 				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d\n" +
-				"    \"type\": {\n";
+				"    \"id\": %d,\n" +
+				"    \"type\": \"%s\",\n" +
+				"    \"Flows\": [\n";
 		
 		for (Flow fl: this.flows) {
-			format += fl.toJSON() + ",";
+			format += fl.toJSON() + ",\n";
 		}
 		
+		// removes last comma and newline
+		format = format.substring(0, format.length() - 2);
+		
 		format +=
-				"    }\n" +
+				"    ]\n" +
 				"}\n";
 		
 		return String.format(format, this.name, this.id, this.type);

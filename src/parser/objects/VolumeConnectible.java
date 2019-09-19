@@ -22,12 +22,13 @@ public class VolumeConnectible extends Connectible {
 
 	public String toJSON() {
 		String format = 
-				"\"%s\": {\n" +
+				"{\n" +
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d,\n" +
+				"    \"type\": \"%s\",\n" +
 				"    \"volume\": %f\n" +
 				"}\n";
-		return String.format(format, this.type, this.name, this.id, this.volume);
+		return String.format(format, this.name, this.id, this.type, this.volume);
 	}
 
 	@Override

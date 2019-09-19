@@ -42,14 +42,15 @@ public class TubeConnectible extends Connectible {
 
 	public String toJSON() {
 		String format = 
-				"\"%s\": {\n" +
+				"{\n" +
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d,\n" +
+				"    \"type\": \"%s\",\n" +
 				"    \"startRadius\": %f,\n" +
 				"    \"endRadius\": %f,\n" +
 				"    \"length\": %f\n" +
 				"}\n";
-		return String.format(format, this.type, this.name, this.id, this.start_radius, this.end_radius, this.length);
+		return String.format(format, this.name, this.id, this.type, this.start_radius, this.end_radius, this.length);
 	}
 
 	@Override
