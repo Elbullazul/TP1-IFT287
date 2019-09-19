@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  targetNamespace="urn:ift287:biblio:element"
+  xmlns = "urn:ift287:body:element"
+  elementFormDefault="qualified">
+
+<xsd:element name="DrHouse" type="MainBody"/>
+
+<!-- Définir les types complexes -->
+<xsd:complexType name="MainBody">
+	<xsd:choice minOccurrs="1" maxOccurs="1" name="Systems">
+		<xsd:element name="" type="Systems"/>
+		<xsd:element name="" type="Organs"/>
+	</xsd:choice>
+</xsd:complexType>
+
+<xsd:complexType name="Systems">
+	<xsd:complexType name="System">
+		<xsd:complexType name="Flow">
+			<xsd:complexType name="Connectible" minOccurrs="1" maxOccurs="unbounded">
+				<xsd:complexType name="AnyConnectible">
+					<xsd:attribute name="name"			type="xsd:string"	use="required"/>
+					<xsd:attribute name="id"			type="xsd:integer"	use="required"/>
+					<xsd:attribute name="volume"		type="xsd:float"	use="optional"/>
+					<xsd:attribute name="length"		type="xsd:float"	use="optional"/>
+					<xsd:attribute name="startRadius"	type="xsd:float"	use="optional"/>
+					<xsd:attribute name="endRadius"		type="xsd:float"	use="optional"/>
+				</xsd:complexType>
+			</xsd:complexType>
+			<xsd:complexType name="Connections">
+				<xsd:complexType name="Connection" minOccurrs="1" maxOccurs="unbounded">
+					<xsd:attribute name="id"			type="xsd:integer"	use="required"/>
+					<xsd:complexType name="to" minOccurrs="1" maxOccurs="unbounded">
+						<xsd:attribute name="id"		type="xsd:integer"	use="required"/>
+					</xsd:complexType>
+				</xsd:complexType>
+			</xsd:complexType>
+		</xsd:complexType>
+	</xsd:complexType>
+</xsd:complexType>
+
+<xsd:complexType name="Organs">
+	<xsd:complexType name="Organ">
+		<xsd:attribute name="name"		type="xsd:string"	use="required"/>
+		<xsd:attribute name="id"		type="xsd:integer"	use="required"/>
+		<xsd:attribute name="systemID"	type="xsd:integer"	use="required"/>
+	</xsd:complexType>
+</xsd:complexType>

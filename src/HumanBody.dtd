@@ -1,0 +1,46 @@
+<?xml version= "1.0" encoding="ISO-8859-1"?>
+<!ELEMENT MainBody (Systems, Organs)>
+<!ATTLIST MainBody
+	bodyname	CDATA	#REQUIRED
+	bodyID		ID		#REQUIRED>
+
+<!ELEMENT Systems (System)>
+
+<!ELEMENT System (Flow)>
+<!ATTLIST System
+	name		CDATA	#REQUIRED
+	id			ID		#REQUIRED
+	type		CDATA	#REQUIRED>
+
+<!ELEMENT Flow (Connectible|Connections)>
+<!ATTLIST Flow
+	id			ID		#REQUIRED>
+
+<!ELEMENT Connectible (connect)>
+
+<!ELEMENT AnyConnectible EMPTY>
+<!ATTLIST AnyConnectible
+	name		CDATA	#REQUIRED
+	id			ID		#REQUIRED
+	volume		CDATA	#IMPLIED
+	length		CDATA	#IMPLIED
+	startRadius	CDATA	#IMPLIED
+	endRadius	CDATA	#IMPLIED>
+
+<!ELEMENT Connections (Connection)>
+
+<!ELEMENT Connection (to)>
+<!ATTLIST Connection
+	id			ID		#REQUIRED>
+
+<!ELEMENT to EMPTY>
+<!ATTLIST to
+	id			IDREF	#REQUIRED>
+
+<!ELEMENT Organs EMPTY>
+
+<!ELEMENT Organ EMPTY>
+<!ATTLIST Organ
+	name		CDATA	#REQUIRED
+	id			ID		#REQUIRED
+	systemID	IDREF	#REQUIRED>
