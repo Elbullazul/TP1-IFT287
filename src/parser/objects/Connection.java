@@ -23,7 +23,7 @@ public class Connection extends BaseObject {
 		String format = 
 				"\"Connection\": {\n" +
 				"    \"id\": %d\n" +
-				"};\n";
+				"}\n";
 		return String.format(format, this.id);
 	}
 

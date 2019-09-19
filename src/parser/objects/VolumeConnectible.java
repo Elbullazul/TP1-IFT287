@@ -26,7 +26,7 @@ public class VolumeConnectible extends Connectible {
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d,\n" +
 				"    \"volume\": %f\n" +
-				"};\n";
+				"}\n";
 		return String.format(format, this.type, this.name, this.id, this.volume);
 	}
 

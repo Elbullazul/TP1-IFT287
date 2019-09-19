@@ -30,4 +30,36 @@ public class MainBody extends BaseObject {
 	public void addOrgan(Organ organ) {
 		this.organs.add(organ);
 	}
+
+	@Override
+	public String toJSON() {
+		String format = 
+				"\"MainBody\": {\n" +
+				"    \"bodyName\": \"%s\",\n" +
+				"    \"bodyId\": %d,\n" +
+				"    \"Systems\": {\n";
+		
+		for (HumanSystem sys : this.systems) {
+			format += sys.toJSON() + ",";
+		}
+		
+		format +=
+				"    },\n" +
+				"\"Organs\": {\n";
+		
+		for (Organ org : this.organs) {
+			format += org.toJSON() + ",\n";
+		}
+		
+		format +=
+				"    }\n" +
+				"}\n";
+		
+		return String.format(format, this.name, this.id);
+	}
+
+	@Override
+	public String toXML() {
+		return "";
+	}
 }

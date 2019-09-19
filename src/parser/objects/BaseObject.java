@@ -1,6 +1,6 @@
 package parser.objects;
 
-public class BaseObject {
+public abstract class BaseObject {
 	protected String name;
 	protected int id;
 	
@@ -25,12 +25,6 @@ public class BaseObject {
 		this.id = id;
 	}
 	
-	// implémenter aussi pour chaque classe
-	public String toJSON() {
-		return "";
-	}
-	
-	public String toXML() {
-		return "";
-	}
+	public abstract String toJSON();
+	public abstract String toXML();
 }

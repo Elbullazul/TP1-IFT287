@@ -12,7 +12,9 @@ public class HumanSystem extends BaseObject {
 	
 	public HumanSystem(String name, int id, String type) {
 		super(name, id);
+
 		this.type = type;
+		this.flows = new ArrayList<Flow>();
 	}
 
 	// Flow management
@@ -35,7 +37,21 @@ public class HumanSystem extends BaseObject {
 
 	@Override
 	public String toJSON() {
-		return null;
+		String format = 
+				"{\n" +
+				"    \"name\": \"%s\",\n" +
+				"    \"id\": %d\n" +
+				"    \"type\": {\n";
+		
+		for (Flow fl: this.flows) {
+			format += fl.toJSON() + ",";
+		}
+		
+		format +=
+				"    }\n" +
+				"}\n";
+		
+		return String.format(format, this.name, this.id, this.type);
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public class Flow extends BaseObject {
 		
 		format +=
 				"    }\n" +
-				"};\n";
+				"}\n";
 		
 		return String.format(format, this.name, this.id);
 	}

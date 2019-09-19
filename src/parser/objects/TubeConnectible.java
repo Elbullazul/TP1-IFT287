@@ -48,7 +48,7 @@ public class TubeConnectible extends Connectible {
 				"    \"startRadius\": %f,\n" +
 				"    \"endRadius\": %f,\n" +
 				"    \"length\": %f\n" +
-				"};\n";
+				"}\n";
 		return String.format(format, this.type, this.name, this.id, this.start_radius, this.end_radius, this.length);
 	}
 

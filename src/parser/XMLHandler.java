@@ -9,7 +9,6 @@ import parser.objects.*;
 public class XMLHandler extends DefaultHandler {
 	private String node = null;
 
-	private BaseObject base;
 	private MainBody body;
 	private HumanSystem system;
 	private Flow flow;
@@ -22,6 +21,7 @@ public class XMLHandler extends DefaultHandler {
 	}
 
 	public void endDocument() throws SAXException {
+		System.out.println(body.toJSON());
 		System.out.println("Fin du parsing");
 	}
 
@@ -50,9 +50,11 @@ public class XMLHandler extends DefaultHandler {
 				
 				switch (aName) {
 				case "id":
+				case "bodyID":
 					id = Integer.parseInt(aValue);
 					break;
 				case "name":
+				case "bodyName":
 					name = aValue;
 					break;
 				case "type":
@@ -93,7 +95,7 @@ public class XMLHandler extends DefaultHandler {
 			
 		case "Flow":
 			flow = new Flow(name, id);
-			System.out.println(flow.toJSON());
+			system.addFlow(flow);
 			break;
 			
 		case "Atrium":

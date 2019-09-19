@@ -18,12 +18,12 @@ public class Connectible extends BaseObject {
 				"\"%s\": {\n" +
 				"    \"name\": \"%s\",\n" +
 				"    \"id\": %d\n" +
-				"};\n";
+				"}\n";
 		return String.format(format, this.type, this.name, this.id);
 	}
 
 	@Override
 	public String toXML() {
-		return super.toXML();
+		return "";
 	}	
 }

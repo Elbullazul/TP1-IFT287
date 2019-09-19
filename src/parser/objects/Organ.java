@@ -22,7 +22,14 @@ public class Organ extends BaseObject {
 
 	@Override
 	public String toJSON() {
-		return null;
+		String format = 
+				"\"Organ\": {\n" +
+				"    \"name\": \"%s\",\n" +
+				"    \"id\": %d,\n" +
+				"    \"systemID\": %d\n" +
+				"}\n";
+		
+		return String.format(format, this.name, this.id, this.system_id);
 	}
 
 	@Override
