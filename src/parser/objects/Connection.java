@@ -29,6 +29,7 @@ public class Connection extends BaseObject {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format ="<Connection id=" +'"' + "%d"+ '"'+"/Connection>";
+		return String.format(format, this.id);
 	}
 }

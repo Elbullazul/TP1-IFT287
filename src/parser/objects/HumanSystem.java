@@ -56,6 +56,11 @@ public class HumanSystem extends BaseObject {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format ;
+		for (Flow fl: this.flows) {
+			format += fl.toJSON() + "\n";
+		}
+		
+		return String.format(format, this.name, this.id, this.type);
 	}
 }

@@ -24,6 +24,11 @@ public class Connectible extends BaseObject {
 
 	@Override
 	public String toXML() {
-		return "";
+		String format = "<%s ";
+		format += "name ="+'"'+ "%s"+'"';
+		format += "id ="+'"'+ "%d"+'"';
+		
+		format += "/>";
+		return String.format(format, this.type, this.name, this.id);
 	}	
 }

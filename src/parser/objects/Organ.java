@@ -34,6 +34,10 @@ public class Organ extends BaseObject {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format = "<Organ name=" + '"' +" %s "+ "id=" + '"' +" %s "+ "systemID=" + '"' +" %d "+'>';
+				
+		
+		
+		return String.format(format, this.name, this.id, this.system_id);
 	}
 }

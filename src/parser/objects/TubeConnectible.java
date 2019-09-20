@@ -54,6 +54,15 @@ public class TubeConnectible extends Connectible {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format = "<%s ";
+				format += "name ="+'"'+ "%s"+'"';
+				format += "id ="+'"'+ "%d"+'"';
+				format += "startRadius ="+'"'+ "%f"+'"';
+				format += "endRadius ="+'"'+ "%f"+'"';
+				format += "length ="+'"'+ "%f"+'"';
+				format += "/>";
+		return String.format(format, this.type, this.name, this.id, this.start_radius, this.end_radius, this.length);
+	
+		
 	}
 }

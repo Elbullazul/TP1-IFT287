@@ -44,6 +44,10 @@ public class TractConnectible extends Connectible {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format = "<%s "+ "name="+ '"'+"%s" +'"'+ "id="+ '"'+"%d"+'"';
+				format += '"'+ "length="+ '"'+"%s" +'"';
+				format += '"'+ "volume="+ '"'+"%s" +'"';
+				format +="/>";
+		return String.format(format, this.type, this.name, this.id, this.length, this.volume);
 	}
 }

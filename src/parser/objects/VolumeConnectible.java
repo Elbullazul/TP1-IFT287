@@ -32,6 +32,12 @@ public class VolumeConnectible extends Connectible {
 
 	@Override
 	public String toXML() {
-		return null;
+		String format = "<%s ";
+		format += "name ="+'"'+ "%s"+'"';
+		format += "id ="+'"'+ "%d"+'"';
+		format += "volume="+'"'+ "%f"+'"';
+		format += "/>";
+		return String.format(format, this.type, this.name, this.id, this.volume);
 	}
+	
 }

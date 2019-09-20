@@ -34,10 +34,11 @@ public class MainBody extends BaseObject {
 	@Override
 	public String toJSON() {
 		String format = 
-				"\"MainBody\": {\n" +
+			"{ " +"\" MainBody\": {\n" +
 				"    \"bodyName\": \"%s\",\n" +
 				"    \"bodyId\": %d,\n" +
-				"    \"Systems\": {\n";
+				"    \"Systems\": {\n"
+		    +"}";
 		
 		for (HumanSystem sys : this.systems) {
 			format += sys.toJSON() + ",";
