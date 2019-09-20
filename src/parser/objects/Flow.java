@@ -1,6 +1,7 @@
 package parser.objects;
 
 import java.util.ArrayList;
+import parser.JSONObject;
 
 public class Flow extends BaseObject {
 	private ArrayList<Connectible> connectibles;
@@ -30,25 +31,36 @@ public class Flow extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"Connectibles\": [\n";
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
 		
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.openArray("Connectibles");
+		
+		int count = 1;
 		for (Connectible cnn: this.connectibles) {
-			format += cnn.toJSON() + ",\n";
+			JSONObject jo = cnn.toJSON();
+			j.addObject(jo, (count != this.connectibles.size()));
+			count++;
 		}
 		
-		// remove last comma
-		format = format.substring(0, format.length() - 2);
+		j.closeArray();
+		j.newLine();
+		j.openArray("Connections");
+
+		count = 1;
+		for (Connection cnn: this.connections) {
+			JSONObject jo = cnn.toJSON();
+			j.addObject(jo, (count != this.connections.size()));
+			count++;
+		}
 		
-		format +=
-				"    ]\n" +
-				"}\n";
+		j.closeArray();
+		j.closeObject();
 		
-		return String.format(format, this.name, this.id);
+		return j;
 	}
 
 	@Override

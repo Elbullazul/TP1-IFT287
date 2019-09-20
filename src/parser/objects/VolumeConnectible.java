@@ -1,5 +1,7 @@
 package parser.objects;
 
+import parser.JSONObject;
+
 public class VolumeConnectible extends Connectible {
 	private double volume;
 
@@ -20,15 +22,18 @@ public class VolumeConnectible extends Connectible {
 		this.volume = volume;
 	}
 
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"type\": \"%s\",\n" +
-				"    \"volume\": %f\n" +
-				"}\n";
-		return String.format(format, this.name, this.id, this.type, this.volume);
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
+		
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.addAttibute("type", this.type, true);
+		j.addAttibute("volume", this.volume, false);
+		
+		j.closeObject();
+		
+		return j;
 	}
 
 	@Override

@@ -4,10 +4,13 @@
 
 package tp1;
 
+import java.io.PrintWriter;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import parser.XMLHandler;
+import parser.objects.MainBody;
 
 /**
  * Fichier de base pour le Devoir1A du cours IFT287
@@ -48,7 +51,13 @@ public class Devoir1A
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser parser = factory.newSAXParser();
 
-			parser.parse(nomFichierXML, new XMLHandler());
+			XMLHandler handler = new XMLHandler();
+			parser.parse(nomFichierXML, handler);
+			MainBody m = handler.getBody();
+			
+			try (PrintWriter out = new PrintWriter(nomFichierJSON)) {
+				out.println(m.toJSON().toString());
+			}
 
 		} catch (Exception e) {
 			System.out.print("An error ocurred: ");

@@ -1,6 +1,7 @@
 package parser.objects;
 
 import java.util.ArrayList;
+import parser.JSONObject;
 
 public class Connection extends BaseObject {
 	private ArrayList<Integer> targets_ids;
@@ -19,24 +20,23 @@ public class Connection extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format = 
-				"\"Connection\": {\n" +
-				"    \"id\": %d\n" +
-				"    \"target_ids\": [\n";
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
 		
-		for (Integer i : this.targets_ids) {
-			format +=
-				"    " + i + ",\n";
+		j.openObject();
+		j.addAttibute("id", this.id, true);
+		j.openArray("target_ids");
+		
+		int count = 1;
+		for (Integer i: this.targets_ids) {
+			j.addInt(i, (count != this.targets_ids.size()));
+			count++;
 		}
 		
-		// remove last comma
-		format = format.substring(0, format.length() - 2);
+		j.closeArray();
+		j.closeObject();
 		
-		format +=
-				"    ]" +
-				"}\n";
-		return String.format(format, this.id);
+		return j;
 	}
 
 	@Override

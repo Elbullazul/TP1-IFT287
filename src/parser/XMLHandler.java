@@ -21,7 +21,6 @@ public class XMLHandler extends DefaultHandler {
 	}
 
 	public void endDocument() throws SAXException {
-		System.out.println(body.toJSON());
 		System.out.println("Fin du parsing");
 	}
 
@@ -149,6 +148,10 @@ public class XMLHandler extends DefaultHandler {
 	}
 
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-//		System.out.println("Fin de l'élément " + qName);
+		// idéalement on fait l'append ici, mais c'est du travail en extra et ça marche pareil
+	}
+	
+	public MainBody getBody() {
+		return body;
 	}
 }

@@ -1,5 +1,7 @@
 package parser.objects;
 
+import parser.JSONObject;
+
 public class Connectible extends BaseObject {
 	protected String type;
 	
@@ -13,14 +15,17 @@ public class Connectible extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"type\": \"%s\"" +
-				"}\n";
-		return String.format(format, this.name, this.id, this.type);
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
+		
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.addAttibute("type", this.type, false);
+		
+		j.closeObject();
+		
+		return j;
 	}
 
 	@Override

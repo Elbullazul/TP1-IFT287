@@ -1,5 +1,7 @@
 package parser.objects;
 
+import parser.JSONObject;
+
 public abstract class BaseObject {
 	protected String name;
 	protected int id;
@@ -25,6 +27,6 @@ public abstract class BaseObject {
 		this.id = id;
 	}
 	
-	public abstract String toJSON();
+	public abstract JSONObject toJSON();
 	public abstract String toXML();
 }

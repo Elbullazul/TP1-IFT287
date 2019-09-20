@@ -1,6 +1,7 @@
 package parser.objects;
 
 import java.util.ArrayList;
+import parser.JSONObject;
 
 public class HumanSystem extends BaseObject {
 	private ArrayList<Flow> flows;
@@ -36,26 +37,26 @@ public class HumanSystem extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"type\": \"%s\",\n" +
-				"    \"Flows\": [\n";
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
 		
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.addAttibute("type", this.type, true);
+		j.openArray("Flows");
+		
+		int count = 1;
 		for (Flow fl: this.flows) {
-			format += fl.toJSON() + ",\n";
+			JSONObject oj = fl.toJSON();
+			j.addObject(oj, (count != this.flows.size()));
+			count++;
 		}
 		
-		// removes last comma and newline
-		format = format.substring(0, format.length() - 2);
+		j.closeArray();
+		j.closeObject();
 		
-		format +=
-				"    ]\n" +
-				"}\n";
-		
-		return String.format(format, this.name, this.id, this.type);
+		return j;
 	}
 
 	@Override

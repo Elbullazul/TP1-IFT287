@@ -1,5 +1,7 @@
 package parser.objects;
 
+import parser.JSONObject;
+
 public class Organ extends BaseObject {
 	private int system_id;
 
@@ -21,15 +23,17 @@ public class Organ extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"systemID\": %d\n" +
-				"}\n";
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
 		
-		return String.format(format, this.name, this.id, this.system_id);
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.addAttibute("systemID", this.system_id, false);
+		
+		j.closeObject();
+		
+		return j;
 	}
 
 	@Override

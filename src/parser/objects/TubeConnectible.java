@@ -1,5 +1,7 @@
 package parser.objects;
 
+import parser.JSONObject;
+
 public class TubeConnectible extends Connectible {
 	private double start_radius;
 	private double end_radius;
@@ -40,17 +42,20 @@ public class TubeConnectible extends Connectible {
 		this.length = length;
 	}
 
-	public String toJSON() {
-		String format = 
-				"{\n" +
-				"    \"name\": \"%s\",\n" +
-				"    \"id\": %d,\n" +
-				"    \"type\": \"%s\",\n" +
-				"    \"startRadius\": %f,\n" +
-				"    \"endRadius\": %f,\n" +
-				"    \"length\": %f\n" +
-				"}\n";
-		return String.format(format, this.name, this.id, this.type, this.start_radius, this.end_radius, this.length);
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
+		
+		j.openObject();
+		j.addAttibute("name", this.name, true);
+		j.addAttibute("id", this.id, true);
+		j.addAttibute("type", this.type, true);
+		j.addAttibute("startRadius", this.start_radius, true);
+		j.addAttibute("endRadius", this.end_radius, true);
+		j.addAttibute("length", this.length, false);
+		
+		j.closeObject();
+		
+		return j;
 	}
 
 	@Override

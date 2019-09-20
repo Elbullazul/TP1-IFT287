@@ -1,6 +1,7 @@
 package parser.objects;
 
 import java.util.ArrayList;
+import parser.JSONObject;
 
 public class MainBody extends BaseObject {
 	private ArrayList<HumanSystem> systems;
@@ -32,38 +33,39 @@ public class MainBody extends BaseObject {
 	}
 
 	@Override
-	public String toJSON() {
-		String format =
-				"{\n" +
-				"\"MainBody\": {\n" +
-				"    \"bodyName\": \"%s\",\n" +
-				"    \"bodyId\": %d,\n" +
-				"    \"Systems\": [\n";
+	public JSONObject toJSON() {
+		JSONObject j = new JSONObject();
+		j.openObject();
+		j.openObject("MainBody");
 		
+		j.addAttibute("bodyName", this.name, true);
+		j.addAttibute("bodyID", this.id, true);
+		
+		j.openArray("Systems");
+		
+		int count = 1;
 		for (HumanSystem sys : this.systems) {
-			format += sys.toJSON() + ",\n";
+			JSONObject jo = sys.toJSON();
+			j.addObject(jo, (count != this.systems.size()));
+			count++;
 		}
 		
-		// remove last comma and newline
-		format = format.substring(0, format.length() - 2);
+		j.closeArray();
+		j.newLine();
+		j.openArray("Organs");
 		
-		format +=
-				"    ],\n" +
-				"\"Organs\": [\n";
-		
+		count = 1;
 		for (Organ org : this.organs) {
-			format += org.toJSON() + ",\n";
+			JSONObject jo = org.toJSON();
+			j.addObject(jo, (count != this.organs.size()));
+			count++;
 		}
 		
-		// remove last comma and newline
-		format = format.substring(0, format.length() - 2);
+		j.closeArray();
+		j.closeObject();
+		j.closeObject();
 		
-		format +=
-				"    ]\n" +
-				"}\n" +
-				"}\n";
-		
-		return String.format(format, this.name, this.id);
+		return j;
 	}
 
 	@Override
