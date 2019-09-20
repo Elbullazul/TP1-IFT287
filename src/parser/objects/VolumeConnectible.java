@@ -1,6 +1,10 @@
 package parser.objects;
 
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class VolumeConnectible extends Connectible {
 	private double volume;
@@ -37,7 +41,15 @@ public class VolumeConnectible extends Connectible {
 	}
 
 	@Override
-	public String toXML() {
-		return null;
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+
+		Element e = xo.newElement(this.type);
+		e.setAttributeNode(xo.newAttribute("name", this.name));
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		e.setAttributeNode(xo.newAttribute("type", this.type));
+		e.setAttributeNode(xo.newAttribute("volume", this.volume));
+
+		return e;
 	}
 }

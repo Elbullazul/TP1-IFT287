@@ -2,6 +2,10 @@ package parser.objects;
 
 import java.util.ArrayList;
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Connection extends BaseObject {
 	private ArrayList<Integer> targets_ids;
@@ -40,7 +44,19 @@ public class Connection extends BaseObject {
 	}
 
 	@Override
-	public String toXML() {
-		return null;
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+		
+		Element e = xo.newElement("Connection");
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		
+		for (Integer i: this.targets_ids) {
+			Element to = xo.newElement("to");
+			to.setAttributeNode(xo.newAttribute("id", i));
+			
+			e.appendChild(to);
+		}
+		
+		return e;
 	}
 }

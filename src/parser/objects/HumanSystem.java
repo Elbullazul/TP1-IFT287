@@ -2,6 +2,10 @@ package parser.objects;
 
 import java.util.ArrayList;
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class HumanSystem extends BaseObject {
 	private ArrayList<Flow> flows;
@@ -60,7 +64,18 @@ public class HumanSystem extends BaseObject {
 	}
 
 	@Override
-	public String toXML() {
-		return null;
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+		
+		Element e = xo.newElement("System");
+		e.setAttributeNode(xo.newAttribute("name", this.name));
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		e.setAttributeNode(xo.newAttribute("type", this.type));
+		
+		for (Flow flow : this.flows) {
+			e.appendChild(flow.toXML(doc));
+		}
+		
+		return e;
 	}
 }

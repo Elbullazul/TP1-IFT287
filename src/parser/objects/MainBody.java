@@ -2,6 +2,10 @@ package parser.objects;
 
 import java.util.ArrayList;
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class MainBody extends BaseObject {
 	private ArrayList<HumanSystem> systems;
@@ -69,7 +73,30 @@ public class MainBody extends BaseObject {
 	}
 
 	@Override
-	public String toXML() {
-		return "";
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+
+		Element body = xo.newElement("MainBody");
+		
+		body.setAttributeNode(xo.newAttribute("bodyName", this.name));
+		body.setAttributeNode(xo.newAttribute("bodyID", this.id));
+		
+		Element systems = xo.newElement("Systems");
+		
+		for (HumanSystem sys : this.systems) {
+			systems.appendChild(sys.toXML(doc));
+		}
+		
+		body.appendChild(systems);
+		
+		Element organs = xo.newElement("Organs");
+		
+		for (Organ org :this.organs) {
+			body.appendChild(org.toXML(doc));
+		}
+		
+		body.appendChild(organs);
+		
+		return body;
 	}
 }

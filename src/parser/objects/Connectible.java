@@ -1,6 +1,10 @@
 package parser.objects;
 
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Connectible extends BaseObject {
 	protected String type;
@@ -29,7 +33,13 @@ public class Connectible extends BaseObject {
 	}
 
 	@Override
-	public String toXML() {
-		return "";
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+		
+		Element e = xo.newElement(this.type);
+		e.setAttributeNode(xo.newAttribute("name", this.name));
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		
+		return e;
 	}	
 }

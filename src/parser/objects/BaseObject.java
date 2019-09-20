@@ -2,6 +2,9 @@ package parser.objects;
 
 import parser.JSONObject;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public abstract class BaseObject {
 	protected String name;
 	protected int id;
@@ -28,5 +31,5 @@ public abstract class BaseObject {
 	}
 	
 	public abstract JSONObject toJSON();
-	public abstract String toXML();
+	public abstract Element toXML(Document doc);
 }

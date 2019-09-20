@@ -1,6 +1,10 @@
 package parser.objects;
 
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class TubeConnectible extends Connectible {
 	private double start_radius;
@@ -59,7 +63,17 @@ public class TubeConnectible extends Connectible {
 	}
 
 	@Override
-	public String toXML() {
-		return null;
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+
+		Element e = xo.newElement(this.type);
+		e.setAttributeNode(xo.newAttribute("name", this.name));
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		e.setAttributeNode(xo.newAttribute("type", this.type));
+		e.setAttributeNode(xo.newAttribute("startRadius", this.start_radius));
+		e.setAttributeNode(xo.newAttribute("endRadius", this.end_radius));
+		e.setAttributeNode(xo.newAttribute("leng", this.length));
+
+		return e;
 	}
 }

@@ -2,6 +2,10 @@ package parser.objects;
 
 import java.util.ArrayList;
 import parser.JSONObject;
+import parser.XMLObject;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 public class Flow extends BaseObject {
 	private ArrayList<Connectible> connectibles;
@@ -37,7 +41,7 @@ public class Flow extends BaseObject {
 		j.openObject();
 		j.addAttibute("name", this.name, true);
 		j.addAttibute("id", this.id, true);
-		j.openArray("Connectibles");
+		j.openArray("Connectible");
 		
 		int count = 1;
 		for (Connectible cnn: this.connectibles) {
@@ -64,7 +68,29 @@ public class Flow extends BaseObject {
 	}
 
 	@Override
-	public String toXML() {
-		return null;
+	public Element toXML(Document doc) {
+		XMLObject xo = new XMLObject(doc);
+		
+		Element e = xo.newElement("Flow");
+		e.setAttributeNode(xo.newAttribute("name", this.name));
+		e.setAttributeNode(xo.newAttribute("id", this.id));
+		
+		Element connectible = xo.newElement("Connectible");
+		
+		for (Connectible cnn : this.connectibles) {
+			connectible.appendChild(cnn.toXML(doc));
+		}
+		
+		e.appendChild(connectible);
+		
+		Element connections = xo.newElement("Connections");
+		
+		for (Connection cnn : this.connections) {
+			connections.appendChild(cnn.toXML(doc));
+		}
+		
+		e.appendChild(connections);
+		
+		return e;
 	}
 }
