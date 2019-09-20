@@ -132,7 +132,7 @@ public class XMLHandler extends DefaultHandler {
 			break;
 			
 		case "Connection":
-			connection = new Connection(name, id);
+			connection = new Connection(id);
 			flow.addConnection(connection);
 			break;
 			

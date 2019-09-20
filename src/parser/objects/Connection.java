@@ -10,10 +10,17 @@ import org.w3c.dom.Element;
 public class Connection extends BaseObject {
 	private ArrayList<Integer> targets_ids;
 
-	public Connection(String name, int id) {
-		super(name, id);
+	public Connection(int id) {
+		super("", id);
 		targets_ids = new ArrayList<Integer>();
 	}
+	
+	// disable name variable
+	@Override
+	public String getName() { return null; }
+
+	@Override
+	public void setName(String name) {}
 
 	public ArrayList<Integer> getTargetsIds() {
 		return targets_ids;
@@ -29,7 +36,7 @@ public class Connection extends BaseObject {
 		
 		j.openObject();
 		j.addAttibute("id", this.id, true);
-		j.openArray("target_ids");
+		j.openArray("to");
 		
 		int count = 1;
 		for (Integer i: this.targets_ids) {

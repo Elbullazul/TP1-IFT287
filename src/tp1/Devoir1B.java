@@ -1,18 +1,14 @@
 // Travail fait par :
-//   NomEquipier1 - Matricule
-//   NomEquipier2 - Matricule
+//   Martin Roy - roym2245
+//   Christian Medel - medc2402
 
 package tp1;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.StringReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -20,13 +16,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import parser.JSONHandler;
-import parser.XMLHandler;
 import parser.objects.MainBody;
 
 import org.w3c.dom.Document;
-
-import javax.json.*;
-import javax.json.stream.JsonParser;
 
 /**
  * Fichier de base pour le Devoir1B du cours IFT287
@@ -71,18 +63,24 @@ public class Devoir1B {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.newDocument();
 
+			// trigger cascade conversion
 			doc.appendChild(m.toXML(doc));
 			
+			// write result
 			FileOutputStream output = new FileOutputStream(nomFichierXML);
-			PrintStream out = new PrintStream(output);
-			TransformerFactory allSpark = TransformerFactory.newInstance();
-			Transformer optimusPrime = allSpark.newTransformer();
+			PrintStream outStream = new PrintStream(output);
+			TransformerFactory tf = TransformerFactory.newInstance();
+			Transformer t = tf.newTransformer();
 
 			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(out);
-			optimusPrime.transform(source, result);
+			StreamResult result = new StreamResult(outStream);
+			
+			// enable indent
+			t.setOutputProperty(OutputKeys.INDENT, "yes");
+			t.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			t.transform(source, result);
 		} catch (Exception e) {
-			System.out.print("An error ocurred: ");
+			System.out.print("An error ocurred: \n");
 			e.printStackTrace();
 		}
 

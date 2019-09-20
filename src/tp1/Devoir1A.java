@@ -1,6 +1,6 @@
 // Travail fait par :
-//   NomEquipier1 - Matricule
-//   NomEquipier2 - Matricule
+//   Martin Roy - roym2245
+//   Christian Medel - medc2402
 
 package tp1;
 
